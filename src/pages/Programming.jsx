@@ -7,20 +7,16 @@ function Programming() {
   const dispatch = useDispatch();
   const savedNews = useSelector((state) => state.savedNews);
 
-  // Fungsi untuk menyimpan berita
   const isSaved = (newsItem) => {
-    // Menggunakan _id yang unik
     return savedNews.some((saved) => saved._id === newsItem._id);
   };
   
   const saveNews = (newsItem) => {
-    // Menyimpan berita dengan menggunakan _id yang unik
-    dispatch({ type: "SAVE_NEWS", payload: newsItem });
+    dispatch({ type: "Save_News", payload: newsItem });
   };
-  
+
   const unSaveNews = (newsItem) => {
-    // Menghapus berita yang spesifik berdasarkan _id
-    dispatch({ type: "UNSAVE_NEWS", payload: newsItem });
+    dispatch({ type: "Unsave_News", payload: newsItem });
   };
 
   useEffect(() => {
@@ -31,7 +27,7 @@ function Programming() {
         setNews(
           data.response.docs.map((article) => ({
             _id: article._id,
-            source: article.source,// Gunakan _id yang unik dari API
+            source: article.source,
             title: article.headline.main,
             description: article.snippet,
             url: article.web_url,

@@ -6,7 +6,7 @@ import NewsCard from "../components/Card";
 export default function Search() {
   const [news, setNews] = useState([]);
   const dispatch = useDispatch();
-  const savedNews = useSelector((state) => state.savedNews); // Mengambil daftar artikel yang disimpan dari Redux
+  const savedNews = useSelector((state) => state.savedNews);
   const apikey = import.meta.env.VITE_API_KEY;
   const query = new URLSearchParams(useLocation().search).get("q");
 
@@ -26,20 +26,18 @@ export default function Search() {
           );
         })
         .catch(() => {
-          setNews([]); // Jika gagal, pastikan news tetap kosong
+          setNews([]);
         });
     }
   }, [query, apikey]);
 
-  // Fungsi untuk memeriksa apakah artikel sudah disimpan
+  
   const isSaved = (url) => savedNews.some((article) => article.url === url);
-
-  // Fungsi untuk menyimpan atau menghapus simpanan artikel
   const handleSave = (article) => {
     if (isSaved(article.url)) {
-      dispatch({ type: "UNSAVE_NEWS", payload: article });
+      dispatch({ type: "Unsave_News", payload: article });
     } else {
-      dispatch({ type: "SAVE_NEWS", payload: article });
+      dispatch({ type: "Save_News", payload: article });
     }
   };
 

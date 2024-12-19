@@ -2,22 +2,21 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import NewsCard from "../components/Card";
 
-function NewsApp() {
-  const [news, setNews] = useState([]); // State untuk menyimpan data berita
+function LatestNews() {
+  const [news, setNews] = useState([]); 
   const dispatch = useDispatch();
   const savedNews = useSelector((state) => state.savedNews);
 
-  // Fungsi untuk menyimpan berita
   const isSaved = (newsItem) => {
     return savedNews.some((saved) => saved._id === newsItem._id);
   };
 
   const saveNews = (newsItem) => {
-    dispatch({ type: "SAVE_NEWS", payload: newsItem });
+    dispatch({ type: "Save_News", payload: newsItem });
   };
 
   const unSaveNews = (newsItem) => {
-    dispatch({ type: "UNSAVE_NEWS", payload: newsItem });
+    dispatch({ type: "Unsave_News", payload: newsItem });
   };
 
   useEffect(() => {
@@ -25,7 +24,7 @@ function NewsApp() {
     fetch(`https://api.nytimes.com/svc/search/v2/articlesearch.json?q=&api-key=${apikey}`)
       .then((response) => response.json())
       .then((data) => {
-        // Mengacak urutan berita
+
         const randomNews = data.response.docs.map((article) => ({
             _id: article._id,
             source: article.source,
@@ -33,7 +32,7 @@ function NewsApp() {
             description: article.snippet,
             url: article.web_url,
           }))
-          .sort(() => Math.random() - 0.5); // Fungsi pengacakan
+          .sort(() => Math.random() - 0.5);
         setNews(randomNews);
       });
   }, []);
@@ -60,4 +59,4 @@ function NewsApp() {
   );
 }
 
-export default NewsApp;
+export default LatestNews;

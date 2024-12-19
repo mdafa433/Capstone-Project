@@ -3,11 +3,10 @@ import { useSelector, useDispatch } from "react-redux";
 
  function Saved() {
   const dispatch = useDispatch();
-  const savedNews = useSelector((state) => state.savedNews); // Ambil berita yang disimpan dari Redux state
+  const savedNews = useSelector((state) => state.savedNews); 
 
-  // Fungsi untuk menghapus berita yang disimpan
   const handleUnsave = (newsItem) => {
-    dispatch({ type: "UNSAVE_NEWS", payload: newsItem });
+    dispatch({ type: "Unsave_News", payload: newsItem });
   };
 
   if (!savedNews || savedNews.length === 0) {

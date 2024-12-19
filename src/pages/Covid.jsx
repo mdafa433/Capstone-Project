@@ -3,26 +3,23 @@ import { useDispatch, useSelector } from "react-redux";
 import NewsCard from "../components/Card";
 
 function Covid() {
-  const [news, setNews] = useState([]); // State untuk menyimpan data berita
+  const [news, setNews] = useState([]);
   const dispatch = useDispatch();
   const savedNews = useSelector((state) => state.savedNews);
 
-  // Fungsi untuk memeriksa apakah berita sudah disimpan
   const isSaved = (newsItem) => {
     return savedNews.some((saved) => saved._id === newsItem._id);
   };
 
-  // Fungsi untuk menyimpan berita
   const saveNews = (newsItem) => {
-    dispatch({ type: "SAVE_NEWS", payload: newsItem });
+    dispatch({ type: "Save_News", payload: newsItem });
   };
 
-  // Fungsi untuk menghapus berita yang disimpan
   const unSaveNews = (newsItem) => {
-    dispatch({ type: "UNSAVE_NEWS", payload: newsItem });
+    dispatch({ type: "Unsave_News", payload: newsItem });
   };
 
-  // Mengambil data berita dari API
+
   useEffect(() => {
     const apikey = import.meta.env.VITE_API_KEY;
     fetch(`https://api.nytimes.com/svc/search/v2/articlesearch.json?q=Covid&api-key=${apikey}`)
@@ -30,8 +27,8 @@ function Covid() {
       .then((data) => {
         setNews(
           data.response.docs.map((article) => ({
-            _id: article._id, // ID unik dari API
-            source: article.source, // Menambahkan sumber berita
+            _id: article._id, 
+            source: article.source, 
             title: article.headline.main,
             description: article.snippet,
             url: article.web_url,
@@ -48,7 +45,7 @@ function Covid() {
           <NewsCard
             key={article._id}
             id={article._id}
-            source={article.source} // Menampilkan sumber berita
+            source={article.source} 
             title={article.title}
             description={article.description}
             url={article.url}

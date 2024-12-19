@@ -5,7 +5,7 @@ function Card({ source, title, description, url, isSaved, onSave }) {
       <h2 className="text-lg font-bold">{title}</h2>
       <p className="text-sm text-gray-700">{description}</p>
       
-      {/* Kontainer untuk Baca Selengkapnya dan Tombol */}
+      
       <div className="flex justify-between items-center mt-auto">
         <a
           href={url}

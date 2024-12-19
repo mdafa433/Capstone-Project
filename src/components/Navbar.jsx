@@ -2,15 +2,12 @@ import { Link, useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 
  function Navbar() {
-  const [query, setQuery] = useState(""); // Menyimpan kata kunci pencarian
-  const navigate = useNavigate(); // Untuk navigasi tanpa reload
-
+  const [query, setQuery] = useState(""); 
+  const navigate = useNavigate(); 
   const handleSearch = (e) => {e.preventDefault();
-
     if (query.trim() !== "") {
-      // Navigasi ke halaman pencarian dengan query sebagai parameter
       navigate(`/search?q=${query}`);
-      setQuery(""); // Mengosongkan input setelah pencarian
+      setQuery("");
     }
   };
 
@@ -18,7 +15,7 @@ import React, { useState } from "react";
     <nav className="bg-black p-4">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         <div className="text-white font-bold text-xl">
-          <Link to="/NewsApp">News App</Link>
+          <Link to="/LatestNews">Berita Terbaru</Link>
         </div>
         <div className="flex items-center space-x-6">
           <Link to="/indonesia" className="text-white hover:bg-white hover:text-black px-4 py-2 rounded-md">
